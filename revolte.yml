@@ -32,4 +32,4 @@ revolte:
             cpu: 2
             memory: 4
             storage: 50
-            engine: postgress
+            engine: mysql
