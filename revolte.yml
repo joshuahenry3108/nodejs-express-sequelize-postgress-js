@@ -1,14 +1,15 @@
 revolte:
   version: '1.0'
-  project: WeMap
-  appName: nodejs-postgres-seq
+  project: My First Project
+  appName: test-postgress
   env:
-    preview:
+    qa:
+      branch: qa
       services:
         rid_1:
           name: web-service
           type: WEB_SERVICE
-          entryPoint: server.js
+          entryPoint: index.js
           specifications:
             cpu: 2
             memory: 2
@@ -23,6 +24,7 @@ revolte:
               DATABASE_USERNAME: '#{db.dbUsername}'
               DATABASE_PASSWORD: '#{db.dbPassword}'
               DATABASE_NAME: '#{db.dbName}'
+              DATABASE_CONNECTION_STRING: '#{db.dbConnectionString}'
         rid_2:
           name: db
           type: DATABASE
@@ -30,4 +32,4 @@ revolte:
             cpu: 2
             memory: 4
             storage: 50
-            engine: postgres
+            engine: mysql
