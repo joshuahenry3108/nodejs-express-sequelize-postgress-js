@@ -33,9 +33,9 @@ revolte:
           type: DATABASE
           specifications:
             engine: postgres
-            cpu: 2
-            memory: 2
-            storage: 20
+            cpu: 4
+            memory: 16
+            storage: 40
     staging:
       branch: staging
       services:
