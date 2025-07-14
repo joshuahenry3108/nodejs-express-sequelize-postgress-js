@@ -1,10 +1,43 @@
 revolte:
   version: '1.0'
-  project: My First Project
-  appName: test-postgress
+  project: growth proj
+  appName: api-postg
   env:
-    qa:
-      branch: qa
+    production:
+      branch: main
+      services:
+        rid_1:
+          name: web-service
+          type: WEB_SERVICE
+          entryPoint: index.js
+          specifications:
+            cpu: 2
+            memory: 2
+            storage: 30
+            autoScaling:
+              replica:
+                min: 1
+                max: 3
+          properties:
+            health: /health
+            port: 8080
+            variables:
+              BASE_URL: /api/v1
+              DATABASE_URL: '#{db.dbUrl}'
+              DATABASE_PORT: '#{db.dbPort}'
+              DATABASE_USERNAME: '#{db.dbUsername}'
+              DATABASE_PASSWORD: '#{db.dbPassword}'
+              DATABASE_NAME: '#{db.dbName}'
+        rid_2:
+          name: db
+          type: DATABASE
+          specifications:
+            engine: postgres
+            cpu: 2
+            memory: 4
+            storage: 20
+    staging:
+      branch: staging
       services:
         rid_1:
           name: web-service
@@ -15,7 +48,7 @@ revolte:
             memory: 2
             storage: 30
           properties:
-            health: /abc/health
+            health: /health
             port: 8080
             variables:
               BASE_URL: /api/v1
@@ -29,7 +62,66 @@ revolte:
           name: db
           type: DATABASE
           specifications:
+            engine: postgres
             cpu: 2
-            memory: 4
-            storage: 50
-            engine: mysql
+            memory: 1
+            storage: 20
+    qa:
+      branch: qa
+      services:
+        rid_1:
+          name: web-service
+          type: WEB_SERVICE
+          entryPoint: index.js
+          specifications:
+            cpu: 2
+            memory: 2
+            storage: 30
+          properties:
+            health: /health
+            port: 8080
+            variables:
+              BASE_URL: /api/v1
+              DATABASE_URL: '#{db.dbUrl}'
+              DATABASE_PORT: '#{db.dbPort}'
+              DATABASE_USERNAME: '#{db.dbUsername}'
+              DATABASE_PASSWORD: '#{db.dbPassword}'
+              DATABASE_NAME: '#{db.dbName}'
+              DATABASE_CONNECTION_STRING: '#{db.dbConnectionString}'
+        rid_2:
+          name: db
+          type: DATABASE
+          specifications:
+            engine: postgres
+            cpu: 2
+            memory: 1
+            storage: 20
+    preview:
+      services:
+        rid_1:
+          name: web-service
+          type: WEB_SERVICE
+          entryPoint: index.js
+          specifications:
+            cpu: 2
+            memory: 2
+            storage: 30
+          properties:
+            health: /
+            port: 8080
+            variables:
+              BASE_URL: /api/v1
+              DATABASE_URL: '#{db.dbUrl}'
+              DATABASE_PORT: '#{db.dbPort}'
+              DATABASE_USERNAME: '#{db.dbUsername}'
+              DATABASE_PASSWORD: '#{db.dbPassword}'
+              DATABASE_NAME: '#{db.dbName}'
+              DATABASE_CONNECTION_STRING: '#{db.dbConnectionString}'
+        rid_2:
+          name: db
+          type: DATABASE
+          specifications:
+            engine: postgres
+            cpu: 2
+            memory: 1
+            storage: 20
