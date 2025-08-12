@@ -11,7 +11,7 @@ revolte:
           type: WEB_SERVICE
           entryPoint: index.js
           specifications:
-            cpu: 2
+            cpu: 1
             memory: 2
             storage: 30
             autoScaling:
