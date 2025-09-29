@@ -1,6 +1,6 @@
 revolte:
   version: '1.0'
-  project: Swimlab
+  project: Swimlabs
   appName: swim-labs-api
   config:
     codeReview:
@@ -132,7 +132,7 @@ revolte:
               DATABASE_CONNECTION_STRING: '#{db.dbConnectionString}'
           specifications:
             cpu: 2
-            memory: 4
+            memory: 2
             storage: 30
         rid_2:
           type: DATABASE
