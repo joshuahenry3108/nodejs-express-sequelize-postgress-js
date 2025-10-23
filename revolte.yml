@@ -1,18 +1,7 @@
 revolte:
   version: '1.0'
-  project: Fun Four
-  appName: fun-app
-  config:
-    codeReview:
-      summarize: false
-      suggestFixes: true
-      commentStyle: Balanced
-    codeQuality:
-      codeStyle:
-        rules:
-          javascript/arrayCallbackReturn: warn
-    testSuite:
-      command: test
+  project: IPSA
+  appName: api-check
   env:
     staging:
       branch: main
