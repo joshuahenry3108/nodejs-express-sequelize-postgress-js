@@ -1,11 +1,24 @@
 const express = require("express");
 const cors = require("cors");
+const winston = require("winston");
 
 const app = express();
 
 var corsOptions = {
   origin: "http://localhost:8081"
 };
+
+// Create logger instance
+const logger = winston.createLogger({
+  level: "info", // default minimum level
+  format: winston.format.combine(
+    winston.format.timestamp(),
+    winston.format.json()
+  ),
+  transports: [
+    new winston.transports.Console(), // prints to console
+  ],
+});
 
 app.use(cors(corsOptions));
 
@@ -33,6 +46,10 @@ db.sequelize.sync()
 // simple route
 app.get("/", (req, res) => {
   //console.log({level: "emerg", "info", "error", "warn"});
+  logger.error("This is an ERROR log");
+  logger.warn("This is a WARN log");
+  logger.info("This is an INFO log");
+  logger.debug("This is a DEBUG log");
   res.json({ message: "Welcome to bezkoder application." });
 });
 
