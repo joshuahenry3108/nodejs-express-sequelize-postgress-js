@@ -32,7 +32,7 @@ db.sequelize.sync()
 
 // simple route
 app.get("/", (req, res) => {
-  console.log({level: "emerg", "info", "error", "warn"});
+  //console.log({level: "emerg", "info", "error", "warn"});
   res.json({ message: "Welcome to bezkoder application." });
 });
 
