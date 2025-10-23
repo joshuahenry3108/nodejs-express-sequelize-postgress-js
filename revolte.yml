@@ -1,10 +1,24 @@
 revolte:
   version: '1.0'
-  project: France
-  appName: fran-app
+  project: Fun Four
+  appName: fun-app
+  config:
+    codeReview:
+      summarize: false
+      suggestFixes: true
+      commentStyle: Balanced
+    codeQuality:
+      codeStyle:
+        rules:
+          javascript/arrayCallbackReturn: warn
+    testSuite:
+      command: test
   env:
     staging:
       branch: main
+      codeReview: true
+      codeQuality: true
+      testSuite: true
       services:
         rid_1:
           type: WEB_SERVICE
@@ -20,9 +34,23 @@ revolte:
               DATABASE_USERNAME: '#{db.dbUsername}'
               DATABASE_PASSWORD: '#{db.dbPassword}'
               DATABASE_NAME: '#{db.dbName}'
+          insights:
+            cpu:
+              - cpu_time_idle
+              - cpu_time_user
+              - cpu_time_system
+            swap:
+              - swap_used
+            mem:
+              - mem_total
+              - mem_free
+            disk:
+              - disk_used
+              - disk_total
+              - disk_free
           specifications:
             cpu: 2
-            memory: 1
+            memory: 2
             storage: 30
         rid_2:
           type: DATABASE
