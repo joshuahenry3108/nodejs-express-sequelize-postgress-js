@@ -62,6 +62,9 @@ revolte:
             engine: postgres
     qa:
       branch: main
+      codeReview: false
+      codeQuality: false
+      testSuite: false
       services:
         rid_1:
           type: WEB_SERVICE
@@ -91,6 +94,9 @@ revolte:
             engine: postgres
     production:
       branch: main
+      codeReview: false
+      codeQuality: false
+      testSuite: false
       services:
         rid_1:
           type: WEB_SERVICE
@@ -123,6 +129,9 @@ revolte:
             storage: 30
             engine: postgres
     preview:
+      codeReview: false
+      codeQuality: false
+      testSuite: false
       services:
         rid_1:
           type: WEB_SERVICE
@@ -140,13 +149,13 @@ revolte:
               DATABASE_NAME: '#{db.dbName}'
           specifications:
             cpu: 2
-            memory: 1
+            memory: 2
             storage: 30
         rid_2:
           type: DATABASE
           name: db
           specifications:
             cpu: 2
-            memory: 1
+            memory: 2
             storage: 30
             engine: postgres
