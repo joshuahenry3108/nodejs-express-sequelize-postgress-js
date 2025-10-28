@@ -9,7 +9,10 @@ revolte:
           javascript/arrayCallbackReturn: warn
   env:
     staging:
-      branch: main
+      branch: cache-test
+      codeReview: false
+      codeQuality: false
+      testSuite: false
       services:
         rid_1:
           type: WEB_SERVICE
@@ -41,10 +44,13 @@ revolte:
           type: CACHE
           name: cache_service
           specifications:
-            cpu: 8
-            memory: 26.04
+            cpu: 2
+            memory: 6.38
     qa:
       branch: main
+      codeReview: false
+      codeQuality: false
+      testSuite: false
       services:
         rid_1:
           type: WEB_SERVICE
@@ -79,7 +85,7 @@ revolte:
             cpu: 2
             memory: 0.5
     production:
-      branch: cache-test
+      branch: main
       codeReview: false
       codeQuality: true
       testSuite: false
@@ -136,6 +142,9 @@ revolte:
             memory: 0.5
             replica: 2
     preview:
+      codeReview: false
+      codeQuality: false
+      testSuite: false
       services:
         rid_1:
           type: WEB_SERVICE
