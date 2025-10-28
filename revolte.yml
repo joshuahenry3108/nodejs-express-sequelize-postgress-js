@@ -1,12 +1,7 @@
 revolte:
   version: '1.0'
-  project: Delight
-  appName: deal-app
-  config:
-    codeQuality:
-      codeStyle:
-        rules:
-          javascript/arrayCallbackReturn: warn
+  project: Tuesday
+  appName: node-cache
   env:
     staging:
       branch: cache-test
