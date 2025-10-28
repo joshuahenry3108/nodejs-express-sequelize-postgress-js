@@ -1,10 +1,15 @@
 revolte:
   version: '1.0'
-  project: Gracias
-  appName: graph-redis
+  project: Delight
+  appName: deal-app
+  config:
+    codeQuality:
+      codeStyle:
+        rules:
+          javascript/arrayCallbackReturn: warn
   env:
     staging:
-      branch: cache-test
+      branch: main
       services:
         rid_1:
           type: WEB_SERVICE
@@ -39,7 +44,7 @@ revolte:
             cpu: 8
             memory: 26.04
     qa:
-      branch: qa/cache
+      branch: main
       services:
         rid_1:
           type: WEB_SERVICE
@@ -74,14 +79,17 @@ revolte:
             cpu: 2
             memory: 0.5
     production:
-      branch: main
+      branch: cache-test
+      codeReview: false
+      codeQuality: true
+      testSuite: false
       services:
         rid_1:
           type: WEB_SERVICE
           name: web_service
           entryPoint: index.js
           properties:
-            health: /health
+            health: /
             port: 8080
             variables:
               BASE_URL: /api/v1
@@ -90,9 +98,23 @@ revolte:
               DATABASE_USERNAME: '#{db.dbUsername}'
               DATABASE_PASSWORD: '#{db.dbPassword}'
               DATABASE_NAME: '#{db.dbName}'
+          insights:
+            cpu:
+              - cpu_time_idle
+              - cpu_time_user
+              - cpu_time_system
+            swap:
+              - swap_used
+            mem:
+              - mem_total
+              - mem_free
+            disk:
+              - disk_free
+              - disk_total
+              - disk_used
           specifications:
             cpu: 2
-            memory: 1
+            memory: 2
             storage: 30
             autoScaling:
               replica:
@@ -112,7 +134,7 @@ revolte:
           specifications:
             cpu: 2
             memory: 0.5
-            replica: 1
+            replica: 2
     preview:
       services:
         rid_1:
