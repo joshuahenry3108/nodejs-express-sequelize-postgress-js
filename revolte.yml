@@ -1,13 +1,45 @@
 revolte:
   version: '1.0'
-  project: IPSA
-  appName: api-check
+  project: Gracias
+  appName: graph-redis
   env:
     staging:
       branch: main
-      codeReview: true
-      codeQuality: true
-      testSuite: true
+      services:
+        rid_1:
+          type: WEB_SERVICE
+          name: web_service
+          entryPoint: index.js
+          properties:
+            health: /health
+            port: 8080
+            variables:
+              BASE_URL: /api/v1
+              DATABASE_URL: '#{db.dbUrl}'
+              DATABASE_PORT: '#{db.dbPort}'
+              DATABASE_USERNAME: '#{db.dbUsername}'
+              DATABASE_PASSWORD: '#{db.dbPassword}'
+              DATABASE_NAME: '#{db.dbName}'
+          specifications:
+            cpu: 2
+            memory: 1
+            storage: 30
+        rid_2:
+          type: DATABASE
+          name: db
+          specifications:
+            cpu: 2
+            memory: 1
+            storage: 30
+            engine: postgres
+        rid_3:
+          type: CACHE
+          name: cache_service
+          specifications:
+            cpu: 2
+            memory: 0.5
+    qa:
+      branch: qa/cache
       services:
         rid_1:
           type: WEB_SERVICE
@@ -23,20 +55,6 @@ revolte:
               DATABASE_USERNAME: '#{db.dbUsername}'
               DATABASE_PASSWORD: '#{db.dbPassword}'
               DATABASE_NAME: '#{db.dbName}'
-          insights:
-            cpu:
-              - cpu_time_idle
-              - cpu_time_user
-              - cpu_time_system
-            swap:
-              - swap_used
-            mem:
-              - mem_total
-              - mem_free
-            disk:
-              - disk_used
-              - disk_total
-              - disk_free
           specifications:
             cpu: 2
             memory: 2
@@ -49,50 +67,21 @@ revolte:
             memory: 1
             storage: 30
             engine: postgres
-    qa:
-      branch: main
-      codeReview: false
-      codeQuality: false
-      testSuite: false
-      services:
-        rid_1:
-          type: WEB_SERVICE
-          name: web_service
-          entryPoint: index.js
-          properties:
-            health: /
-            port: 8080
-            variables:
-              BASE_URL: /api/v1
-              DATABASE_URL: '#{db.dbUrl}'
-              DATABASE_PORT: '#{db.dbPort}'
-              DATABASE_USERNAME: '#{db.dbUsername}'
-              DATABASE_PASSWORD: '#{db.dbPassword}'
-              DATABASE_NAME: '#{db.dbName}'
+        rid_3:
+          type: CACHE
+          name: cache_service
           specifications:
             cpu: 2
-            memory: 2
-            storage: 30
-        rid_2:
-          type: DATABASE
-          name: db
-          specifications:
-            cpu: 2
-            memory: 2
-            storage: 30
-            engine: postgres
+            memory: 0.5
     production:
       branch: main
-      codeReview: false
-      codeQuality: false
-      testSuite: false
       services:
         rid_1:
           type: WEB_SERVICE
           name: web_service
           entryPoint: index.js
           properties:
-            health: /
+            health: /health
             port: 8080
             variables:
               BASE_URL: /api/v1
@@ -117,17 +106,21 @@ revolte:
             memory: 1
             storage: 30
             engine: postgres
+        rid_3:
+          type: CACHE
+          name: cache_service
+          specifications:
+            cpu: 2
+            memory: 0.5
+            replica: 1
     preview:
-      codeReview: false
-      codeQuality: false
-      testSuite: false
       services:
         rid_1:
           type: WEB_SERVICE
           name: web_service
           entryPoint: index.js
           properties:
-            health: /
+            health: /health
             port: 8080
             variables:
               BASE_URL: /api/v1
@@ -138,13 +131,19 @@ revolte:
               DATABASE_NAME: '#{db.dbName}'
           specifications:
             cpu: 2
-            memory: 2
+            memory: 1
             storage: 30
         rid_2:
           type: DATABASE
           name: db
           specifications:
             cpu: 2
-            memory: 2
+            memory: 1
             storage: 30
             engine: postgres
+        rid_3:
+          type: CACHE
+          name: cache_service
+          specifications:
+            cpu: 2
+            memory: 0.5
