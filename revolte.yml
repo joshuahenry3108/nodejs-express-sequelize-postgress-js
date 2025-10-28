@@ -5,9 +5,6 @@ revolte:
   env:
     staging:
       branch: cache-test
-      codeReview: false
-      codeQuality: false
-      testSuite: false
       services:
         rid_1:
           type: WEB_SERVICE
@@ -42,10 +39,7 @@ revolte:
             cpu: 2
             memory: 6.38
     qa:
-      branch: main
-      codeReview: false
-      codeQuality: false
-      testSuite: false
+      branch: cache-new
       services:
         rid_1:
           type: WEB_SERVICE
@@ -81,9 +75,6 @@ revolte:
             memory: 0.5
     production:
       branch: main
-      codeReview: false
-      codeQuality: true
-      testSuite: false
       services:
         rid_1:
           type: WEB_SERVICE
@@ -137,9 +128,6 @@ revolte:
             memory: 0.5
             replica: 2
     preview:
-      codeReview: false
-      codeQuality: false
-      testSuite: false
       services:
         rid_1:
           type: WEB_SERVICE
