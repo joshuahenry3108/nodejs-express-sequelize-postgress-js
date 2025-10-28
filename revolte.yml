@@ -4,14 +4,14 @@ revolte:
   appName: graph-redis
   env:
     staging:
-      branch: main
+      branch: cache-test
       services:
         rid_1:
           type: WEB_SERVICE
           name: web_service
           entryPoint: index.js
           properties:
-            health: /health
+            health: /
             port: 8080
             variables:
               BASE_URL: /api/v1
@@ -22,7 +22,7 @@ revolte:
               DATABASE_NAME: '#{db.dbName}'
           specifications:
             cpu: 2
-            memory: 1
+            memory: 2
             storage: 30
         rid_2:
           type: DATABASE
