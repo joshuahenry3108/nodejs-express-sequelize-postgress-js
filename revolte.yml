@@ -1,10 +1,10 @@
 revolte:
   version: '1.0'
-  project: Tuesday
-  appName: node-cache
+  project: Sky high
+  appName: cache-node
   env:
     staging:
-      branch: cache-test
+      branch: cache-new
       services:
         rid_1:
           type: WEB_SERVICE
@@ -20,24 +20,27 @@ revolte:
               DATABASE_USERNAME: '#{db.dbUsername}'
               DATABASE_PASSWORD: '#{db.dbPassword}'
               DATABASE_NAME: '#{db.dbName}'
+              CACHE_HOST: '#{cache.cacheHost}'
+              CACHE_PORT: '#{cache.cachePort}'
+              CACHE_PASSWORD: '#{cache.cachePassword}'
           specifications:
             cpu: 2
-            memory: 2
+            memory: 1
             storage: 30
         rid_2:
           type: DATABASE
           name: db
           specifications:
             cpu: 2
-            memory: 2
+            memory: 1
             storage: 30
             engine: postgres
         rid_3:
           type: CACHE
-          name: cache_service
+          name: cache
           specifications:
             cpu: 2
-            memory: 6.38
+            memory: 0.5
     qa:
       branch: cache-new
       services:
@@ -55,6 +58,14 @@ revolte:
               DATABASE_USERNAME: '#{db.dbUsername}'
               DATABASE_PASSWORD: '#{db.dbPassword}'
               DATABASE_NAME: '#{db.dbName}'
+              CACHE_HOST: '#{cache.cacheHost}'
+              CACHE_PORT: '#{cache.cachePort}'
+              CACHE_PASSWORD: '#{cache.cachePassword}'
+          insights:
+            cpu:
+              - cpu_time_idle
+              - cpu_time_user
+              - cpu_time_system
           specifications:
             cpu: 2
             memory: 2
@@ -69,7 +80,7 @@ revolte:
             engine: postgres
         rid_3:
           type: CACHE
-          name: cache_service
+          name: cache
           specifications:
             cpu: 2
             memory: 0.5
@@ -90,23 +101,12 @@ revolte:
               DATABASE_USERNAME: '#{db.dbUsername}'
               DATABASE_PASSWORD: '#{db.dbPassword}'
               DATABASE_NAME: '#{db.dbName}'
-          insights:
-            cpu:
-              - cpu_time_idle
-              - cpu_time_user
-              - cpu_time_system
-            swap:
-              - swap_used
-            mem:
-              - mem_total
-              - mem_free
-            disk:
-              - disk_free
-              - disk_total
-              - disk_used
+              CACHE_HOST: '#{cache.cacheHost}'
+              CACHE_PORT: '#{cache.cachePort}'
+              CACHE_PASSWORD: '#{cache.cachePassword}'
           specifications:
             cpu: 2
-            memory: 2
+            memory: 1
             storage: 30
             autoScaling:
               replica:
@@ -122,11 +122,11 @@ revolte:
             engine: postgres
         rid_3:
           type: CACHE
-          name: cache_service
+          name: cache
           specifications:
             cpu: 2
             memory: 0.5
-            replica: 2
+            replica: 1
     preview:
       services:
         rid_1:
@@ -134,7 +134,7 @@ revolte:
           name: web_service
           entryPoint: index.js
           properties:
-            health: /health
+            health: /
             port: 8080
             variables:
               BASE_URL: /api/v1
@@ -143,6 +143,9 @@ revolte:
               DATABASE_USERNAME: '#{db.dbUsername}'
               DATABASE_PASSWORD: '#{db.dbPassword}'
               DATABASE_NAME: '#{db.dbName}'
+              CACHE_HOST: '#{cache.cacheHost}'
+              CACHE_PORT: '#{cache.cachePort}'
+              CACHE_PASSWORD: '#{cache.cachePassword}'
           specifications:
             cpu: 2
             memory: 1
@@ -157,7 +160,7 @@ revolte:
             engine: postgres
         rid_3:
           type: CACHE
-          name: cache_service
+          name: cache
           specifications:
             cpu: 2
             memory: 0.5
