@@ -1,13 +1,10 @@
 revolte:
   version: '1.0'
-  project: IPSA
-  appName: api-check
+  project: BuildCore
+  appName: seqapp
   env:
     staging:
       branch: main
-      codeReview: true
-      codeQuality: true
-      testSuite: true
       services:
         rid_1:
           type: WEB_SERVICE
@@ -51,9 +48,6 @@ revolte:
             engine: postgres
     qa:
       branch: main
-      codeReview: false
-      codeQuality: false
-      testSuite: false
       services:
         rid_1:
           type: WEB_SERVICE
@@ -83,9 +77,6 @@ revolte:
             engine: postgres
     production:
       branch: main
-      codeReview: false
-      codeQuality: false
-      testSuite: false
       services:
         rid_1:
           type: WEB_SERVICE
@@ -118,9 +109,6 @@ revolte:
             storage: 30
             engine: postgres
     preview:
-      codeReview: false
-      codeQuality: false
-      testSuite: false
       services:
         rid_1:
           type: WEB_SERVICE
